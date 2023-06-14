@@ -1,0 +1,116 @@
+* {
+   margin: 0;
+   box-sizing: border-box;
+}
+
+body {
+   font-family: 'Poppins', sans-serif;
+   background-color: hsl(0, 1%, 44%);
+   height: 100vh;
+   padding: 20px;
+}
+
+main {
+   background-color: white;
+   border-radius: 15px;
+   border-bottom-right-radius: 50px;
+   padding: 1em;
+}
+
+form {
+}
+.date-infos {
+   display: flex;
+   gap: 1.5em;
+}
+.date-infos label {
+   text-transform: uppercase;
+   font-weight: 700;
+   color: hsl(0, 1%, 44%);
+   font-size: 0.5rem;
+   display: block;
+   letter-spacing: 1px;
+}
+.date-infos input {
+   padding: 0.5em;
+   width: 75px;
+   border-radius: 2px;
+   color: hsl(0, 0%, 8%);
+   font-size: 18px;
+   font-weight: 700;
+   border: 0.5px solid hsl(0, 1%, 44%);
+   cursor: pointer;
+}
+.date-infos input::placeholder {
+   color: hsl(0, 1%, 44%);
+}
+.date-infos input :focus {
+   border: 1px solid hsl(259, 100%, 65%);
+}
+.alert {
+   color: hsl(0, 100%, 67%);
+   font-size: 0.5rem;
+   font-style: italic;
+}
+
+.submit-section {
+   display: flex;
+   align-items: center;
+   padding-right: 2rem;
+}
+.line {
+   flex-grow: 1;
+   height: 0.5px;
+   background-color: hsl(0, 0%, 86%);
+}
+button {
+   background-color: hsl(259, 100%, 65%);
+   border: none;
+   padding: 5px;
+   border-radius: 50%;
+   width: 3rem;
+   height: 3rem;
+   cursor: pointer;
+}
+button img {
+   width: 70%;
+}
+button:active,
+button:hover {
+   background-color: black;
+}
+
+.result-section {
+   font-size: 2.5rem;
+   font-style: italic;
+   font-weight: 800;
+}
+
+@media screen and (min-width: 375px) {
+   body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+   }
+
+   main {
+      max-width: 550px;
+      margin: 0 auto;
+   }
+}
+
+.colors {
+   background-color: hsl(259, 100%, 65%);
+
+   background-color: hsl(0, 100%, 67%);
+
+   background-color: hsl(0, 0%, 100%);
+
+   background-color: hsl(0, 0%, 94%);
+
+   background-color: hsl(0, 0%, 86%);
+
+   background-color: hsl(0, 1%, 44%);
+
+   background-color: hsl(0, 0%, 8%);
+}
