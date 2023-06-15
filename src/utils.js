@@ -14,10 +14,37 @@ export const isGoodValue = (exp) => {
    } else return false
 }
 
-export const calculateTimeDiff = (startDate, option) => {
+function getDecimalPart(number) {
+   // Convert the number to a string.
+   let strNumber = number.toString()
+
+   // Get the index of the decimal point.
+   let decimalIndex = strNumber.indexOf('.')
+
+   // If there is no decimal point, return the number itself.
+   if (decimalIndex === -1) {
+      return number
+   }
+
+   // Get the decimal part of the number.
+   let decimalPart = strNumber.substring(decimalIndex + 1)
+
+   // Convert the decimal part to a number.
+   return parseFloat('0.' + decimalPart)
+}
+
+export const calculateTimeDiff = (startDate) => {
    const startObj = new Date(startDate)
    const todayObj = new Date()
 
    const diffInMs = todayObj.getTime() - startObj.getTime()
-   const diffInMsInYears = diffInMs * (1000 * 60 * 60 * 24 * 365)
+   const diffInYears = diffInMs / (1000 * 60 * 60 * 24 * 365)
+   console.log(getDecimalPart(diffInYears))
+   const diffInMonths = getDecimalPart(diffInYears) * 12
+   const diffInDays = getDecimalPart(diffInMonths) * 30
+   return {
+      year: Math.floor(diffInYears),
+      month: Math.floor(diffInMonths),
+      day: Math.floor(diffInDays),
+   }
 }

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Date from './components/Date'
+import Results from './components/Results'
 import btn from './assets/images/icon-arrow.svg'
+import { calculateTimeDiff } from './utils'
 export default function App() {
-   const [isValidDate, setIsValidDate] = useState(true)
+   const [isValidDate, setIsValidDate] = useState(false)
    const [userDate, setUserDate] = useState(() => ({
       day: '',
       month: '',
@@ -18,9 +20,9 @@ export default function App() {
       return aDate instanceof Date && !isNaN(aDate)
    }
 
-   useEffect(() => {
-      console.log(userDate)
-   }, [userDate])
+   // useEffect(() => {
+   //    console.log(userDate)
+   // }, [userDate])
 
    const handleForm = (e) => {
       setUserDate((prevDate) => {
@@ -28,17 +30,11 @@ export default function App() {
       })
    }
 
-   const getResult = (e, d) => {
+   const getResult = (e) => {
       e.preventDefault()
-      const dateText = `${d.year}-${d.month}-${d.day}`
-      const date = new Date(dateText)
-      const currentDate = new Date()
-      console.log(d)
-      setResult({
-         year: 38,
-         month: 3,
-         day: 26,
-      })
+      const date = `${userDate.year}-${userDate.month}-${userDate.day}`
+      console.log(date)
+      setResult(calculateTimeDiff(date))
    }
 
    return (
@@ -67,32 +63,17 @@ export default function App() {
                </div>
                <div className='submit-section'>
                   <div className='line'></div>
-                  <button type='submit' onClick={(e) => getResult(e, userDate)}>
+                  <button
+                     type='submit'
+                     disabled={isValidDate}
+                     onClick={getResult}
+                  >
                      <img src={btn} alt='submit button' />
                   </button>
                </div>
             </form>
          </section>
-         <section className='result-section'>
-            <div>
-               <span style={{ color: 'hsl(259, 100%, 65%)' }}>
-                  {result.year}
-               </span>{' '}
-               years{' '}
-            </div>
-            <div>
-               <span style={{ color: 'hsl(259, 100%, 65%)' }}>
-                  {result.month}
-               </span>{' '}
-               months
-            </div>
-            <div>
-               <span style={{ color: 'hsl(259, 100%, 65%)' }}>
-                  {result.day}
-               </span>{' '}
-               days
-            </div>
-         </section>
+         <Results result={result} />
       </main>
    )
 }

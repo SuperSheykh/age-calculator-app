@@ -1,7 +1,5 @@
 import React from 'react'
 export default function Date({ type, handleForm, userDate }) {
-   console.log(Number(''))
-
    const isGoodValue = (exp) => {
       if (exp === '') {
          return true
@@ -29,7 +27,9 @@ export default function Date({ type, handleForm, userDate }) {
    const parStyle = isGoodValue(value)
       ? { display: 'none' }
       : { display: 'block' }
-   const inputStyle = {}
+   const inputStyle = isGoodValue(value)
+      ? {}
+      : { borderColor: 'hsl(0, 100%, 67%)' }
    const message = (type) => {
       return type === 'year' ? 'Must be in the past' : `Must be a valid ${type}`
    }
