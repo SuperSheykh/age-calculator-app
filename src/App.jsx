@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Date from './components/Date'
 import Results from './components/Results'
 import btn from './assets/images/icon-arrow.svg'
-import { calculateTimeDiff } from './utils'
+import { calculateTimeDiff, isGoodDateFormat } from './utils'
 export default function App() {
    const [isValidDate, setIsValidDate] = useState(false)
    const [userDate, setUserDate] = useState(() => ({
@@ -16,13 +16,18 @@ export default function App() {
       day: '--',
    }))
 
-   const checkIfDateValid = (aDate) => {
-      return aDate instanceof Date && !isNaN(aDate)
+   const getDate = (obj) => {
+      return `${obj.year}-${
+         obj.month.length === 1 ? '0' + obj.month : obj.month
+      }-${obj.day.length === 1 ? '0' + obj.day : obj.day}`
    }
 
-   // useEffect(() => {
-   //    console.log(userDate)
-   // }, [userDate])
+   useEffect(() => {
+      const date = getDate(userDate)
+      console.log(date)
+      console.log(isGoodDateFormat(date))
+      setIsValidDate(isGoodDateFormat(date))
+   }, [userDate])
 
    const handleForm = (e) => {
       setUserDate((prevDate) => {
@@ -32,9 +37,11 @@ export default function App() {
 
    const getResult = (e) => {
       e.preventDefault()
-      const date = `${userDate.year}-${userDate.month}-${userDate.day}`
+      const date = getDate(userDate)
       console.log(date)
-      setResult(calculateTimeDiff(date))
+      if (isValidDate) {
+         setResult(calculateTimeDiff(date))
+      }
    }
 
    return (
@@ -45,19 +52,19 @@ export default function App() {
                   <Date
                      type='day'
                      handleForm={handleForm}
-                     isValidDate={isValidDate}
+                     setIsValidDate={setIsValidDate}
                      userDate={userDate}
                   />
                   <Date
                      type='month'
                      handleForm={handleForm}
-                     isValidDate={isValidDate}
+                     setIsValidDate={setIsValidDate}
                      userDate={userDate}
                   />
                   <Date
                      type='year'
                      handleForm={handleForm}
-                     isValidDate={isValidDate}
+                     setIsValidDate={setIsValidDate}
                      userDate={userDate}
                   />
                </div>
@@ -65,7 +72,7 @@ export default function App() {
                   <div className='line'></div>
                   <button
                      type='submit'
-                     disabled={isValidDate}
+                     disabled={!isValidDate}
                      onClick={getResult}
                   >
                      <img src={btn} alt='submit button' />

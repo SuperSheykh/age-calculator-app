@@ -14,6 +14,26 @@ export const isGoodValue = (exp) => {
    } else return false
 }
 
+export function isGoodDateFormat(date) {
+   // Check if the value is a string
+   if (typeof date !== 'string') {
+      return false
+   }
+
+   // Create a regular expression to match date formats
+   const regex = /^\d{4}-\d{2}-\d{2}$/
+
+   // Check if the date string matches the regular expression
+   if (!regex.test(date)) {
+      return false
+   }
+
+   // Check if the date is in the past
+   const today = new Date()
+   const dateObj = new Date(date)
+   return dateObj <= today
+}
+
 function getDecimalPart(number) {
    // Convert the number to a string.
    let strNumber = number.toString()
