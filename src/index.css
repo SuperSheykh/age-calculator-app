@@ -20,7 +20,7 @@ main {
 .date-infos {
    display: flex;
    gap: 1.5em;
-   padding-bottom: em;
+   padding-bottom: 1em;
 }
 .date-infos label {
    text-transform: uppercase;
